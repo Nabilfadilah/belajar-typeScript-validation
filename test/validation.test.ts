@@ -26,4 +26,20 @@ describe('zod', () => {
         const price = priceSchema.parse(20000)
         console.info("Rp.", price)
     })
+
+    it('should support data conversion', async () => {
+        
+        const usenameSchema = z.coerce.string().min(3).max(100)
+        const isAdminSchema = z.coerce.boolean()
+        const priceSchema = z.coerce.number().min(1000).max(1000000)
+
+        const username = usenameSchema.parse(3393939)
+        console.info(username)
+
+        const isAdmin = isAdminSchema.parse("true")
+        console.info(isAdmin)
+
+        const price = priceSchema.parse("20000")
+        console.info(price)
+    })
 })
