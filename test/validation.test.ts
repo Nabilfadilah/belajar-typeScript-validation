@@ -1,4 +1,4 @@
-import {z} from "zod"
+import {z, ZodError, ZodObject} from "zod"
 
 describe('zod', () => {
     
@@ -51,5 +51,35 @@ describe('zod', () => {
         
         const birthDate2 = birthDateSchema.parse(new Date(1990, 1, 1))
         console.info(birthDate2)
+    })
+
+    // validation error - video 84
+    it('should support zod error if invalid', async () => {
+        
+        const schema = z.string().email().min(3).max(100)
+
+        try {
+            schema.parse("el")
+        } catch (err) {
+            if (err instanceof ZodError) {
+                console.error(err)
+                // err errors.forEach((error) => {
+                //     console.info(error.message)
+                // })
+            }
+        }
+    })
+
+    it('should support zod error if invalid without exception', async () => {
+        
+        const schema = z.string().email().min(3).max(100)
+
+        const result = schema.safeParse("Kaoka@gmail.com")
+
+        if (result.success) {
+            console.info(result)
+        } else {
+            console.info(result.error)
+        }
     })
 })
