@@ -1,4 +1,4 @@
-import {z, ZodError, ZodObject} from "zod"
+import {RefinementCtx, z, ZodError, ZodObject} from "zod"
 
 describe('zod', () => {
     
@@ -164,4 +164,34 @@ describe('zod', () => {
 
         console.info(result)
     })
+
+    // custome validation - video 90
+    function mastUpperCase(data: string, ctx: RefinementCtx): string {
+        if (data != data.toUpperCase()) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "username harus uppercase"
+            })
+            return z.NEVER
+        } else {
+            return data
+        }
+    }
+
+    it('should can use custome validation', async () => {
+        
+        const loginSchema = z.object({
+            username: z.string().email().transform(mastUpperCase),
+            password: z.string().min(6).max(20)
+        })
+        
+        const request = {
+            username: "NABIL@GMAIL.COM",
+            password: "12345678"
+        }
+    
+        const result = loginSchema.parse(request)
+        console.info(result)
+    })
+
 })
