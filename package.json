@@ -1,0 +1,30 @@
+{
+  "name": "belajar-typescript-validation",
+  "version": "1.0.0",
+  "description": "Pada repo ini saya memperlajari typescript dari materi programmer zaman now dengan kelas dari udemy. dengan kelas yang diambil yaitu \"Belajar pemrograman TypeScript dari pemula sampai mahir\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-typescript": "^7.26.0",
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.14",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}
