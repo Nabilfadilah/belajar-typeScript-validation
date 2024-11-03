@@ -126,6 +126,42 @@ describe('zod', () => {
 
         const result = createUserSchema.parse(request)
         console.info(result)
+    })
 
+    // collection validation - video 86
+    it('should can validate array', async () => {
+        // array validation
+        const schema = z.array(z.string()).min(1).max(10)
+
+        const request: Array<string> = ["Jacob", "Eldo", "Compalius"]
+        const result: Array<string> = schema.parse(request)
+
+        console.log(result)
+    })
+
+    it('should can validate set', async () => {
+        // set validation
+        const schema = z.set(z.string()).min(1).max(10)
+
+        // kalau ada data yang sama, maka akan ditampilkan satu saja
+        const request: Set<string> = new Set(["a", "b", "c", "a", "e"]);
+        const result: Set<string> = schema.parse(request)
+
+        console.log(result)
+    })
+
+    it('should support', async () => {
+        // map validation
+        // bisa menentukan key tipe nya apa, dan value tipenya apa?
+        const schema = z.map(z.string(), z.string())
+
+        const request: Map<string, string> = new Map([
+            ["name", "Eldo"],
+            ["age", "22"]
+        ])
+
+        const result: Map<string, string> = schema.parse(request)
+
+        console.info(result)
     })
 })
